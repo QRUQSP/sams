@@ -47,6 +47,17 @@ function qruqsp_sams_main() {
             return 'M.qruqsp_sams_main.message.open(\'M.qruqsp_sams_main.menu.open();\',\'' + d.id + '\',M.qruqsp_sams_main.message.nplist);';
         }
     }
+    this.menu.refresh = function() {
+        M.api.getJSONCb('qruqsp.sams.messageList', {'tnid':M.curTenantID}, function(rsp) {
+            if( rsp.stat != 'ok' ) {
+                M.api.err(rsp);
+                return false;
+            }
+            var p = M.qruqsp_sams_main.menu;
+            p.data.messages = rsp.messages;
+            p.refreshSection('messages');
+        });
+    }
     this.menu.open = function(cb) {
         M.api.getJSONCb('qruqsp.sams.messageList', {'tnid':M.curTenantID}, function(rsp) {
             if( rsp.stat != 'ok' ) {
@@ -60,6 +71,7 @@ function qruqsp_sams_main() {
             p.show(cb);
         });
     }
+    this.menu.addButton('refresh', 'Refresh', 'M.qruqsp_sams_main.menu.refresh();');
     this.menu.addClose('Back');
 
     //
