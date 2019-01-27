@@ -1,0 +1,46 @@
+#
+# Description
+# -----------
+# This table stores the messages setn and received via APRS
+#
+# Fields
+# ------
+# id:                       The ID assigned to the record.
+# uuid:                     The Universal Unique ID.
+# tnid:                     The Tenant ID the record belongs to.
+#
+# msg_id:                   The Unique ID of the message, used for tracking purposes.
+#
+# status:                   The current status of the message.
+#
+#                               10 - Draft
+#                               20 - Queued
+#                               30 - Sending
+#                               40 - Sent
+#                               70 - Received
+#
+# from_callsign:            The Callsign sender of the message.
+# to_callsign:              The Callsign of the receipient of the message.
+# path:                     The Digipeater callsigns of the path.
+#
+# content:                  The content of the message.
+#
+# date_added:               The UTC date and time the record was added.
+# last_updated:             The UTC date and time the record was last update.
+#
+create table qruqsp_sams_messages (
+    id int not null auto_increment,
+    uuid char(36) not null,
+    tnid int not null,
+    msg_id char(36) not null,
+    status tinyint unsigned not null,
+    from_callsign varchar(250) not null,
+    to_callsign varchar(250) not null,
+    path varchar(250) not null,
+    content varchar(250) not null,
+    date_added datetime not null,
+    last_updated datetime not null,
+    primary key (id),
+    unique index (uuid),
+    index sync (tnid, uuid, last_updated)
+) ENGINE='InnoDB', COMMENT='v1.01';
