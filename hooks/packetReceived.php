@@ -12,7 +12,6 @@
 // args: The arguments for the hook
 //
 function qruqsp_sams_hooks_packetReceived(&$ciniki, $tnid, $args) {
-error_log('packet received');    
     //
     // If no packet in args, then perhaps a packet we don't understand
     //
@@ -34,7 +33,9 @@ error_log('packet received');
     //
     // Check for a message packet
     //
-    if( isset($args['packet']['data'][0]) && preg_match("/^:([a-zA-Z0-9\- ]{9}):(.*)$/", $args['packet']['data'], $matches) ) {
+    if( isset($args['packet']['data'][0]) && $args['packet']['data'][0] == ':'
+        && preg_match("/^:([a-zA-Z0-9\- ]{9}):(.*)$/", $args['packet']['data'], $matches) 
+        ) {
         error_log('found message');
         $to_callsign = $matches[1];
         $content = $matches[2];

@@ -37,12 +37,30 @@ function qruqsp_sams_messageSend(&$ciniki, $tnid, $message_id) {
         return array('stat'=>'fail', 'err'=>array('code'=>'qruqsp.sams.12', 'msg'=>'Unable to find requested message'));
     }
     $message = $rc['message'];
-   
+
+    //
+    // Create the packet
+    //
+    $packet = array(
+        'addrs' => array(
+            strtoupper($message['to_callsign']),
+            strtoupper($message['from_callsign']),
+            'WIDE2-1',
+            ),
+        'control' => 0x03, 
+        'protocol' => 0xf0,
+        'data' => sprintf(":%-9s:%s", $message['to_callsign'], $message['content']),
+        );
+
+    //
+    // FIXME: Add zulu timestamp to end of message for each ACK tracking ' [HHMMSSz]' eg: ' [224854z]'
+    //
+
     //
     // Send the message
     //
-    ciniki_core_loadMethod($ciniki, 'qruqsp', 'tnc', 'hooks', 'messageSend');
-    $rc = qruqsp_tnc_hooks_messageSend($ciniki, $tnid, $message);
+    ciniki_core_loadMethod($ciniki, 'qruqsp', 'tnc', 'hooks', 'packetSend');
+    $rc = qruqsp_tnc_hooks_packetSend($ciniki, $tnid, array('packet' => $packet));
     if( $rc['stat'] != 'ok' ) {
         return array('stat'=>'fail', 'err'=>array('code'=>'qruqsp.sams.11', 'msg'=>'Error sending message', 'err'=>$rc['err']));
     }
