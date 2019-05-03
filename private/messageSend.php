@@ -45,7 +45,7 @@ function qruqsp_sams_messageSend(&$ciniki, $tnid, $message_id) {
         'addrs' => array(
             strtoupper($message['to_callsign']),
             strtoupper($message['from_callsign']),
-            'WIDE2-1',
+            'WIDE2-2',
             ),
         'control' => 0x03, 
         'protocol' => 0xf0,
