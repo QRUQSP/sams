@@ -36,7 +36,6 @@ function qruqsp_sams_hooks_packetReceived(&$ciniki, $tnid, $args) {
     if( isset($args['packet']['data'][0]) && $args['packet']['data'][0] == ':'
         && preg_match("/^:([a-zA-Z0-9\- ]{9}):(.*)$/", $args['packet']['data'], $matches) 
         ) {
-        error_log('found message');
         $to_callsign = $matches[1];
         $content = $matches[2];
 
@@ -46,7 +45,6 @@ function qruqsp_sams_hooks_packetReceived(&$ciniki, $tnid, $args) {
             $from_callsign = '??';
         }
         error_log('Received: (' . $to_callsign . ') ' . $content);
-        error_log(print_r($args['packet']['addrs'], true));
 
         //
         // Get a UUID for use in permalink
@@ -75,10 +73,6 @@ function qruqsp_sams_hooks_packetReceived(&$ciniki, $tnid, $args) {
         if( $rc['stat'] != 'ok' ) {
             return array('stat'=>'fail', 'err'=>array('code'=>'qruqsp.sams.14', 'msg'=>'Unable to store aprs message', 'err'=>$rc['err']));
         }
-    }
-
-    else {
-        error_log($args['packet']['data']);
     }
 
     //
