@@ -17,7 +17,7 @@ function qruqsp_sams_main() {
         'messages':{'label':'Recent Messages', 'type':'simplegrid', 'num_cols':1,
             'cellClasses':['multiline'],
             'noData':'No message',
-            'addTxt':'Add Message',
+            'addTxt':'Send Message',
             'addFn':'M.qruqsp_sams_main.message.open(\'M.qruqsp_sams_main.menu.open();\',0,null);'
             },
     }
@@ -88,7 +88,7 @@ function qruqsp_sams_main() {
             'content':{'label':'Message Content', 'type':'text'},
             }},
         '_buttons':{'label':'', 'buttons':{
-            'save':{'label':'Save', 'fn':'M.qruqsp_sams_main.message.save();'},
+            'save':{'label':'Send Now', 'fn':'M.qruqsp_sams_main.message.save();'},
             'delete':{'label':'Delete', 
                 'visible':function() {return M.qruqsp_sams_main.message.message_id > 0 ? 'yes' : 'no'; },
                 'fn':'M.qruqsp_sams_main.message.remove();'},
