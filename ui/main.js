@@ -86,6 +86,7 @@ function qruqsp_sams_main() {
             'from_callsign':{'label':'From', 'type':'text'},
             'to_callsign':{'label':'To', 'type':'text'},
             'content':{'label':'Message Content', 'type':'text'},
+            'hops':{'label':'Hops', 'type':'toggle', 'default':'2', 'toggles':{'1':'1', '2':'2', '3':'3', '4':'4', '5':'5', '6':'6', '7':'7'}},
             }},
         '_buttons':{'label':'', 'buttons':{
             'save':{'label':'Send Now', 'fn':'M.qruqsp_sams_main.message.save();'},

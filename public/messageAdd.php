@@ -24,6 +24,7 @@ function qruqsp_sams_messageAdd(&$ciniki) {
         'from_callsign'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'From'),
         'to_callsign'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'To'),
         'content'=>array('required'=>'yes', 'blank'=>'no', 'name'=>'Message Content'),
+        'hops'=>array('required'=>'no', 'blank'=>'no', 'default'=>'2', 'name'=>'Hops'),
         ));
     if( $rc['stat'] != 'ok' ) {
         return $rc;

@@ -44,7 +44,8 @@ function qruqsp_sams_messageList($ciniki) {
         . "qruqsp_sams_messages.from_callsign, "
         . "qruqsp_sams_messages.to_callsign, "
         . "qruqsp_sams_messages.path, "
-        . "qruqsp_sams_messages.content "
+        . "qruqsp_sams_messages.content, "
+        . "qruqsp_sams_messages.hops "
         . "FROM qruqsp_sams_messages "
         . "WHERE qruqsp_sams_messages.tnid = '" . ciniki_core_dbQuote($ciniki, $args['tnid']) . "' "
         . "ORDER BY date_added DESC "
@@ -53,7 +54,7 @@ function qruqsp_sams_messageList($ciniki) {
     ciniki_core_loadMethod($ciniki, 'ciniki', 'core', 'private', 'dbHashQueryArrayTree');
     $rc = ciniki_core_dbHashQueryArrayTree($ciniki, $strsql, 'qruqsp.sams', array(
         array('container'=>'messages', 'fname'=>'id', 
-            'fields'=>array('id', 'msg_id', 'status', 'from_callsign', 'to_callsign', 'path', 'content')),
+            'fields'=>array('id', 'msg_id', 'status', 'from_callsign', 'to_callsign', 'path', 'content', 'hops')),
         ));
     if( $rc['stat'] != 'ok' ) {
         return $rc;

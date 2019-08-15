@@ -28,6 +28,7 @@ function qruqsp_sams_objects(&$ciniki) {
             'to_callsign' => array('name'=>'To Callsign'),
             'path' => array('name'=>'Digipeater Path', 'default'=>''),
             'content' => array('name'=>'Message Content'),
+            'hops' => array('name'=>'Hops', 'default'=>'0'),
             ),
         'history_table' => 'qruqsp_sams_history',
         );

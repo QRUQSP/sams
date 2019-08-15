@@ -24,7 +24,8 @@ function qruqsp_sams_messageSend(&$ciniki, $tnid, $message_id) {
         . "qruqsp_sams_messages.from_callsign, "
         . "qruqsp_sams_messages.to_callsign, "
         . "qruqsp_sams_messages.path, "
-        . "qruqsp_sams_messages.content "
+        . "qruqsp_sams_messages.content, "
+        . "qruqsp_sams_messages.hops "
         . "FROM qruqsp_sams_messages "
         . "WHERE qruqsp_sams_messages.tnid = '" . ciniki_core_dbQuote($ciniki, $tnid) . "' "
         . "AND qruqsp_sams_messages.id = '" . ciniki_core_dbQuote($ciniki, $message_id) . "' "
@@ -45,12 +46,20 @@ function qruqsp_sams_messageSend(&$ciniki, $tnid, $message_id) {
         'addrs' => array(
             strtoupper($message['to_callsign']),
             strtoupper($message['from_callsign']),
-            'WIDE2-2',
             ),
         'control' => 0x03, 
         'protocol' => 0xf0,
         'data' => sprintf(":%-9s:%s", $message['to_callsign'], $message['content']),
         );
+
+    //
+    // Setup the number of hops
+    //
+    if( isset($message['hops']) && $message['hops'] > 0 && $message['hops'] <= 7 ) {
+        $packet['addrs'][] = 'WIDE' . $message['hops'] . '-' . $message['hops'];
+    } else {
+        $packet['addrs'][] = 'WIDE2-2';
+    }
 
     //
     // FIXME: Add zulu timestamp to end of message for each ACK tracking ' [HHMMSSz]' eg: ' [224854z]'

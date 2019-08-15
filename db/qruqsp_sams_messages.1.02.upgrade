@@ -1,0 +1,5 @@
+#
+# Add the hops column
+#
+ALTER TABLE qruqsp_sams_messages ADD COLUMN hops int not null AFTER content;
+ALTER TABLE qruqsp_sams_messages COMMENT='v1.02';

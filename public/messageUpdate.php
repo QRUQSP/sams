@@ -23,6 +23,7 @@ function qruqsp_sams_messageUpdate(&$ciniki) {
         'to_callsign'=>array('required'=>'no', 'blank'=>'yes', 'name'=>'To'),
         'path'=>array('required'=>'no', 'blank'=>'yes', 'name'=>'Digipeater Path'),
         'content'=>array('required'=>'no', 'blank'=>'yes', 'name'=>'Message Content'),
+        'hops'=>array('required'=>'no', 'blank'=>'no', 'name'=>'Hops'),
         ));
     if( $rc['stat'] != 'ok' ) {
         return $rc;

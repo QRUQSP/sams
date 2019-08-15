@@ -24,6 +24,7 @@
 # path:                     The Digipeater callsigns of the path.
 #
 # content:                  The content of the message.
+# hops:                     The number of hops for the message when originating from the tenant.
 #
 # date_added:               The UTC date and time the record was added.
 # last_updated:             The UTC date and time the record was last update.
@@ -38,9 +39,10 @@ create table qruqsp_sams_messages (
     to_callsign varchar(250) not null,
     path varchar(250) not null,
     content varchar(250) not null,
+    hops int not null,
     date_added datetime not null,
     last_updated datetime not null,
     primary key (id),
     unique index (uuid),
     index sync (tnid, uuid, last_updated)
-) ENGINE='InnoDB', COMMENT='v1.01';
+) ENGINE='InnoDB', COMMENT='v1.02';
