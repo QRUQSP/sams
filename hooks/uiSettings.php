@@ -32,6 +32,7 @@ function qruqsp_sams_hooks_uiSettings(&$ciniki, $tnid, $args) {
         $menu_item = array(
             'priority'=>5000,
             'label'=>'Messages',
+            'helpcontent' => 'Send and receive APRS messages, this module is still in beta.',
             'edit'=>array('app'=>'qruqsp.sams.main'),
             );
         $rsp['menu_items'][] = $menu_item;
