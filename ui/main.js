@@ -142,15 +142,15 @@ function qruqsp_sams_main() {
         }
     }
     this.message.remove = function() {
-        if( confirm('Are you sure you want to remove message?') ) {
-            M.api.getJSONCb('qruqsp.sams.messageDelete', {'tnid':M.curTenantID, 'message_id':this.message_id}, function(rsp) {
+        M.confirm('Are you sure you want to remove message?',null,function() {
+            M.api.getJSONCb('qruqsp.sams.messageDelete', {'tnid':M.curTenantID, 'message_id':M.qruqsp_sams_main.message.message_id}, function(rsp) {
                 if( rsp.stat != 'ok' ) {
                     M.api.err(rsp);
                     return false;
                 }
                 M.qruqsp_sams_main.message.close();
             });
-        }
+        });
     }
     this.message.nextButtonFn = function() {
         if( this.nplist != null && this.nplist.indexOf('' + this.message_id) < (this.nplist.length - 1) ) {
@@ -186,7 +186,7 @@ function qruqsp_sams_main() {
         //
         var ac = M.createContainer(ap, 'qruqsp_sams_main', 'yes');
         if( ac == null ) {
-            alert('App Error');
+            M.alert('App Error');
             return false;
         }
         
